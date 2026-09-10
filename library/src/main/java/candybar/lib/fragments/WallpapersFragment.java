@@ -48,7 +48,6 @@ import candybar.lib.adapters.WallpapersAdapter;
 import candybar.lib.applications.CandyBarApplication;
 import candybar.lib.databases.Database;
 import candybar.lib.helpers.JsonHelper;
-import candybar.lib.helpers.TapIntroHelper;
 import candybar.lib.helpers.WallpaperHelper;
 import candybar.lib.items.Wallpaper;
 import candybar.lib.preferences.Preferences;
@@ -168,7 +167,7 @@ public class WallpapersFragment extends Fragment {
 
         search.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+            public boolean onMenuItemActionExpand(@NonNull MenuItem menuItem) {
                 searchInput.requestFocus();
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -181,7 +180,7 @@ public class WallpapersFragment extends Fragment {
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+            public boolean onMenuItemActionCollapse(@NonNull MenuItem menuItem) {
                 searchInput.setText("");
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (getActivity() != null) {
@@ -288,14 +287,6 @@ public class WallpapersFragment extends Fragment {
 
                 ((WallpapersListener) getActivity())
                         .onWallpapersChecked(Database.get(getActivity()).getWallpapersCount());
-
-                try {
-                    if (getActivity().getResources().getBoolean(R.bool.show_intro)) {
-                        TapIntroHelper.showWallpapersIntro(getActivity(), mRecyclerView);
-                    }
-                } catch (Exception e) {
-                    LogUtil.e(Log.getStackTraceString(e));
-                }
             } else {
                 Toast.makeText(getActivity(), R.string.connection_failed,
                         Toast.LENGTH_LONG).show();
