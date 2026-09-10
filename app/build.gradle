@@ -51,11 +51,6 @@ android {
     lint {
         abortOnError false
     }
-
-    packagingOptions {
-        pickFirst 'META-INF/proguard/androidx-*.pro'
-        pickFirst 'META-INF/DEPENDENCIES'
-    }
 }
 
 java {
