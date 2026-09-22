@@ -1,5 +1,6 @@
 package candybar.lib.adapters.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -110,8 +110,17 @@ public class CreditsAdapter extends BaseAdapter {
         }
 
         if (CandyBarGlideModule.isValidContextForGlide(mContext)) {
+            String imageName = credit.getImage();
+
+            @SuppressLint("DiscouragedApi")
+            int resourceId = mContext.getResources().getIdentifier(
+                    imageName,
+                    "drawable",
+                    mContext.getPackageName()
+            );
+
             Glide.with(mContext)
-                    .load(credit.getImage())
+                    .load(resourceId)
                     .override(144)
                     .optionalCenterInside()
                     .circleCrop()
@@ -139,7 +148,7 @@ public class CreditsAdapter extends BaseAdapter {
             image = view.findViewById(R.id.image);
 
             int color = ColorHelper.getAttributeColor(mContext, android.R.attr.textColorSecondary);
-            ViewCompat.setBackground(image, DrawableHelper.getTintedDrawable(
+            image.setBackground(DrawableHelper.getTintedDrawable(
                     mContext, R.drawable.ic_toolbar_circle, ColorHelper.setColorAlpha(color, 0.4f)));
         }
     }
