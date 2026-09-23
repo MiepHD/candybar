@@ -10,9 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
 
-import com.danimahardhika.android.helpers.core.ColorHelper;
-import com.danimahardhika.android.helpers.core.DrawableHelper;
-
 import candybar.lib.R;
 
 /*
@@ -81,10 +78,6 @@ public class ChangelogAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             changelog = view.findViewById(R.id.changelog);
-            int color = ColorHelper.getAttributeColor(mContext, com.google.android.material.R.attr.colorSecondary);
-            changelog.setCompoundDrawablesWithIntrinsicBounds(
-                    DrawableHelper.getTintedDrawable(mContext, R.drawable.ic_changelog_dot, color),
-                    null, null, null);
         }
     }
 }
